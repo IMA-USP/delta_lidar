@@ -138,7 +138,7 @@ void publish_scan(ros::Publisher *pub,
 int main(int argc, char *argv[])
 {
     // Initialize the ROS node.
-    ros::init(argc, argv, "delta_2a_lidar_node");
+    ros::init(argc, argv, "delta_lidar_node");
 
     // Create public and private node handles.
     ros::NodeHandle nh;
@@ -149,7 +149,7 @@ int main(int argc, char *argv[])
     nh_private.param<std::string>("serial_port", opt_com_path, "/dev/ttyUSB1");
 
     std::string frame_id;
-    nh_private.param<std::string>("frame_id", frame_id, "laser");
+    nh_private.param<std::string>("frame_id", frame_id, "laser_frame");
 
     // Optionally, you could retrieve scan range parameters as well.
     double range_min, range_max;
