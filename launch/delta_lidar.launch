@@ -1,8 +1,16 @@
 <launch>
+
+  <arg name="serial_port" default="/dev/lidar" />
+  <arg name="frame_id" default="laser_frame" />
+  <arg name="range_min" default="1.8" />
+  <arg name="range_max" default="5.0" />
+  
+
   <node name="delta_lidar" pkg="delta_lidar" type="delta_lidar_node" output="screen" respawn="true">
-    <param name="serial_port" type="string" value="/dev/lidar"/>
-    <param name="frame_id" type="string" value="laser_frame"/>
-    <param name="range_min" type="double" value="1.5"/>
-    <param name="range_max" type="double" value="5.0"/>
+    <param name="serial_port" type="string" value="$(arg serial_port)"/>
+    <param name="frame_id" type="string" value="$(arg frame_id)"/>
+    <param name="range_min" type="double" value="$(arg range_min)"/>
+    <param name="range_max" type="double" value="$(arg range_max)"/>
   </node>
+  
 </launch>

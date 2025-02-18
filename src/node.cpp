@@ -80,12 +80,10 @@ void publish_scan(ros::Publisher *pub,
     const size_t num_points = 360;
     scan_msg.angle_increment = (scan_msg.angle_max - scan_msg.angle_min) / (num_points - 1);
 
-    // Set the scan timing parameters.
-    scan_msg.scan_time = scan_time;
-    if (node_count > 1)
-        scan_msg.time_increment = scan_time / static_cast<double>(node_count - 1);
-    else
-        scan_msg.time_increment = 0.0;
+    // Laser scans at 6.2Hz
+    scan_msg.scan_time = 1 / 6.2;
+    // Sampling rate is 5000/s
+    scan_msg.time_increment = 1 / (5000.0);
 
     // Set the range limits for valid measurements.
     // These were acquired from the product's datasheet.
@@ -146,7 +144,7 @@ int main(int argc, char *argv[])
 
     // Retrieve parameters from the ROS parameter server.
     std::string opt_com_path;
-    nh_private.param<std::string>("serial_port", opt_com_path, "/dev/ttyUSB1");
+    nh_private.param<std::string>("serial_port", opt_com_path, "/dev/lidar");
 
     std::string frame_id;
     nh_private.param<std::string>("frame_id", frame_id, "laser_frame");

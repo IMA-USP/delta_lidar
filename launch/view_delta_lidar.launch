@@ -1,5 +1,17 @@
 <launch>
-  <include file="$(find delta_lidar)/launch/delta_lidar.launch" />
+
+  <arg name="serial_port" default="/dev/ttyUSB0" />
+  <arg name="frame_id" default="laser_frame" />
+  <arg name="range_min" default="0.05" />
+  <arg name="range_max" default="5.0" />
+ 
+  <include file="$(find delta_lidar)/launch/delta_lidar.launch">
+    <arg name="serial_port" value="$(arg serial_port)" />
+    <arg name="frame_id" value="$(arg frame_id)" />
+    <arg name="range_min" value="$(arg range_min)" />
+    <arg name="range_max" value="$(arg range_max)" />
+  </include>
 
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find delta_lidar)/rviz/delta_lidar.rviz" />
+  
 </launch>
